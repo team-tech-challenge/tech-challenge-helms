@@ -1,0 +1,64 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kong
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: kong
+    targetRevision: 13.0.1
+    helm:
+      values: |
+        global:
+          imagePullSecrets: []
+        useDaemonset: true
+        image:
+          registry: docker.io
+          repository: bitnami/kong
+          tag: 3.8.0-debian-12-r2
+        database: postgresql
+        postgresql:
+          enabled: false
+          external:
+            host: "tech-challenge-postgresql.cl1sidq0kykf.us-east-1.rds.amazonaws.com"
+            port: 5432
+            user: "tech_challenge"
+            password: "your-db-password"
+            database: kong
+            existingSecret: kong-external-secret
+        service:
+          type: ClusterIP
+          exposeAdmin: true
+          ports:
+            proxyHttp: 80
+            proxyHttps: 443
+            adminHttp: 8001
+            adminHttps: 8444
+        ingress:
+          enabled: false
+          ingressClassName: nginx
+          hostname: kong.mydomain.com
+          tls: true
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-musatech
+        kong:
+          resources:
+            requests:
+              cpu: 76m
+              memory: 314Mi
+            limits:
+              cpu: 152m
+              memory: 628Mi
+        ingressController:
+          enabled: false
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tool-authorization
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true

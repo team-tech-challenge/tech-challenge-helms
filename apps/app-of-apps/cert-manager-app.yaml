@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://charts.jetstack.io
+    chart: cert-manager
+    targetRevision: v1.15.3
+    helm:
+      values: |
+        installCRDs: true
+        webhook:
+          enabled: true
+          resources:
+            limits:
+              cpu: "5m"
+              memory: "25Mi"
+            requests:
+              cpu: "1m"
+              memory: "13Mi"
+        cainjector:
+          resources:
+            limits:
+              cpu: "10m"
+              memory: "60Mi"
+            requests:
+              cpu: "2m"
+              memory: "30Mi"
+        resources:
+          limits:
+            cpu: "10m"
+            memory: "60Mi"
+          requests:
+            cpu: "2m"
+            memory: "30Mi"
+  destination:
+    namespace: cert-manager
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
+      - Force=true

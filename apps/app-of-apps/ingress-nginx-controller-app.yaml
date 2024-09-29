@@ -1,0 +1,77 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://kubernetes.github.io/ingress-nginx
+      chart: ingress-nginx
+      targetRevision: 4.11.2
+      helm:
+        parameters:
+          - name: controller.kind
+            value: "DaemonSet"
+          - name: defaultBackend.enabled
+            value: "true"
+          - name: controller.config.allow-snippet-annotations
+            value: "false"
+          - name: controller.config.client-body-buffer-size
+            value: "32k"
+          - name: controller.config.client-max-body-size
+            value: "10m"
+          - name: controller.config.disable-ipv6
+            value: "true"
+          - name: controller.config.enable-access-log
+            value: "true"
+          - name: controller.config.enable-modsecurity
+            value: "true"
+          - name: controller.config.enable-owasp-modsecurity-crs
+            value: "true"
+          - name: controller.config.hsts
+            value: "true"
+          - name: controller.config.hsts-include-subdomains
+            value: "true"
+          - name: controller.config.hsts-max-age
+            value: "31536000"
+          - name: controller.config.keep-alive
+            value: "64"
+          - name: controller.config.keep-alive-requests
+            value: "100"
+          - name: controller.config.keep-alive-timeout
+            value: "75s"
+          - name: controller.config.large-client-header-buffers
+            value: "4 16k"
+          - name: controller.config.load-balance
+            value: "round_robin"
+          - name: controller.config.ssl-ciphers
+            value: "HIGH:!aNULL:!MD5"
+          - name: controller.config.ssl-prefer-server-ciphers
+            value: "on"
+          - name: controller.config.ssl-protocols
+            value: "TLSv1.2 TLSv1.3"
+          - name: controller.resources.requests.cpu
+            value: "7m"
+          - name: controller.resources.requests.memory
+            value: "112Mi"
+          - name: controller.resources.limits.cpu
+            value: "50m"
+          - name: controller.resources.limits.memory
+            value: "200Mi"
+          - name: defaultBackend.resources.requests.cpu
+            value: "1m"
+          - name: defaultBackend.resources.requests.memory
+            value: "4Mi"
+  destination:
+    namespace: tool-ingress
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
