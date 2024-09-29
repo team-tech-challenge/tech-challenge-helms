@@ -24,9 +24,9 @@ spec:
         postgresql:
           enabled: false
           external:
-            host: "keycloak-dev.cdocnde8res0.us-east-1.rds.amazonaws.com"
+            host: "tech-challenge-postgresql.cl1sidq0kykf.us-east-1.rds.amazonaws.com"
             port: 5432
-            user: "muser"
+            user: "tech_challenge"
             password: "your-db-password"
             database: kong
             existingSecret: kong-external-secret
