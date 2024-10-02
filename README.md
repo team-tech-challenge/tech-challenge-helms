@@ -25,7 +25,7 @@ How to prerequisites for utilization of this repository.
 1. A GitHub account.
 
 2. Access to the ArgoCD instances for each environment (DEV, STG, PROD):
-    - **PROD**: [https://argocd.tech-challenge.com.br](https://argocd.tech.musa.co)
+    - **PROD**: [https://argocd.techchallenge.com.br](https://argocd.techchallenge.musa.co)
 
 3. `kubectl` installed on your machine. You can install it by following the [official guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
