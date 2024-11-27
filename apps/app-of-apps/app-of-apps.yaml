@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/team-tech-challenge/tech-challenge-helms.git'
-    targetRevision: HEAD
+    targetRevision: create-new-applications
     path: apps/app-of-apps/
     directory:
       recurse: true

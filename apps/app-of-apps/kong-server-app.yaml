@@ -24,7 +24,7 @@ spec:
         postgresql:
           enabled: false
           external:
-            host: "tech-challenge-postgresql.cl1sidq0kykf.us-east-1.rds.amazonaws.com"
+            host: "tech-challenge-postgresql.clwfjxlpe5hc.us-east-1.rds.amazonaws.com"
             port: 5432
             user: "tech_challenge"
             password: "your-db-password"
