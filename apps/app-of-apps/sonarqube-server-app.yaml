@@ -40,6 +40,20 @@ spec:
           storageClass: gp2
           accessMode: ReadWriteOnce
           size: 50Gi
+        
+        ingress:
+          enabled: true
+          ingressClassName: "nginx"
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-musatech
+          hosts:
+            - name: sonarqube.techchallenge.com.br
+              path: /
+              pathType: Prefix
+          tls:
+            - secretName: sonarqube-tls-secret
+              hosts:
+                - sonarqube.techchallenge.com.br
   destination:
     namespace: tool-security
     server: 'https://kubernetes.default.svc'
