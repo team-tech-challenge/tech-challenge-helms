@@ -1,68 +1,68 @@
-#apiVersion: argoproj.io/v1alpha1
-#kind: Application
-#metadata:
-#  name: sonarqube
-#  namespace: argocd
-#  finalizers:
-#    - resources-finalizer.argocd.argoproj.io
-#spec:
-#  project: default
-#  source:
-#    repoURL: https://SonarSource.github.io/helm-chart-sonarqube
-#    chart: sonarqube
-#    targetRevision: 10.7.0+3598
-#    helm:
-#      releaseName: sonarqube
-#      values: |
-#        deploymentType: Deployment
-#        replicaCount: 1
-#        edition: community
-#
-#        postgresql:
-#          enabled: false
-#
-#        service:
-#          type: ClusterIP
-#
-#        jdbcOverwrite:
-#          enabled: true
-#          jdbcUrl: jdbc:postgresql://tech-challenge-postgresql.clwfjxlpe5hc.us-east-1.rds.amazonaws.com:5432/sonarqube
-#          jdbcUsername: tech_challenge
-#          jdbcSecretName: sonarqube-sonarqube
-#
-#        initSysctl:
-#          enabled: true
-#          vmMaxMapCount: 524288
-#          fsFileMax: 131072
-#
-#        persistence:
-#          enabled: true
-#          storageClass: gp2
-#          accessMode: ReadWriteOnce
-#          size: 50Gi
-#
-#        ingress:
-#          enabled: true
-#          ingressClassName: "nginx"
-#          annotations:
-#            cert-manager.io/cluster-issuer: letsencrypt-tech-challenge
-#          hosts:
-#            - name: sonarqube.techchallenge.com.br
-#              path: /
-#              pathType: Prefix
-#          tls:
-#            - secretName: sonarqube-tls-secret
-#              hosts:
-#                - sonarqube.techchallenge.com.br
-#  destination:
-#    namespace: tool-security
-#    server: 'https://kubernetes.default.svc'
-#  syncPolicy:
-#    automated:
-#      prune: true
-#      selfHeal: true
-#    syncOptions:
-#      - PruneLast=true
-#      - ApplyOutOfSyncOnly=true
-#      - ServerSideApply=true
-#      - CreateNamespace=true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sonarqube
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://SonarSource.github.io/helm-chart-sonarqube
+    chart: sonarqube
+    targetRevision: 10.7.0+3598
+    helm:
+      releaseName: sonarqube
+      values: |
+        deploymentType: Deployment
+        replicaCount: 1
+        edition: community
+
+        postgresql:
+          enabled: false
+
+        service:
+          type: ClusterIP
+
+        jdbcOverwrite:
+          enabled: true
+          jdbcUrl: jdbc:postgresql://tech-challenge-postgresql.clwfjxlpe5hc.us-east-1.rds.amazonaws.com:5432/sonarqube
+          jdbcUsername: tech_challenge
+          jdbcSecretName: sonarqube-sonarqube
+
+        initSysctl:
+          enabled: true
+          vmMaxMapCount: 524288
+          fsFileMax: 131072
+
+        persistence:
+          enabled: true
+          storageClass: gp2
+          accessMode: ReadWriteOnce
+          size: 50Gi
+
+        ingress:
+          enabled: true
+          ingressClassName: "nginx"
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-tech-challenge
+          hosts:
+            - name: sonarqube.techchallenge.com.br
+              path: /
+              pathType: Prefix
+          tls:
+            - secretName: sonarqube-tls-secret
+              hosts:
+                - sonarqube.techchallenge.com.br
+  destination:
+    namespace: tool-security
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PruneLast=true
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
+      - CreateNamespace=true
