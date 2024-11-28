@@ -14,46 +14,7 @@ spec:
     helm:
       releaseName: sonarqube
       values: |
-        postgresql:
-          enabled: false
-        jdbcOverwrite:
-          jdbcUrl: jdbc:postgresql://tech-challenge-postgresql.clwfjxlpe5hc.us-east-1.rds.amazonaws.com:5432/sonarqube
-          jdbcUsername: tech_challenge
-          jdbcPassword: tKg!dY8TW*vgfQez(kgk_
-        service:
-          type: ClusterIP
-  destination:
-    namespace: tool-security
-    server: 'https://kubernetes.default.svc'
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - PruneLast=true
-      - ApplyOutOfSyncOnly=true
-      - ServerSideApply=true
-      - CreateNamespace=true
-
-
-
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: sonarqube
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  project: default
-  source:
-    repoURL: https://SonarSource.github.io/helm-chart-sonarqube
-    chart: sonarqube
-    targetRevision: 10.7.0+3598
-    helm:
-      releaseName: sonarqube
-      values: |
-        deploymentType: StatefulSet
+        deploymentType: Deployment
         replicaCount: 1
         edition: community
 
@@ -70,12 +31,6 @@ spec:
           enabled: true
           vmMaxMapCount: 524288
           fsFileMax: 131072
-
-        persistence:
-          enabled: false
-          storageClass: "gp2"
-          size: 20Gi
-
   destination:
     namespace: tool-security
     server: 'https://kubernetes.default.svc'
