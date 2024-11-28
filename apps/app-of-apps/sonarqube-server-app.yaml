@@ -37,6 +37,7 @@ spec:
         
         persistence:
           enabled: true
+          storageClass: gp2
           accessMode: ReadWriteOnce
           size: 50Gi
   destination:
