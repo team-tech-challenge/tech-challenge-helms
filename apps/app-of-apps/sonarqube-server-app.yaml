@@ -17,6 +17,9 @@ spec:
         deploymentType: Deployment
         replicaCount: 1
         edition: community
+        
+        postgresql:
+          enabled: false
 
         service:
           type: ClusterIP
