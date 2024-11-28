@@ -8,19 +8,27 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://SonarSource.github.io/helm-chart-sonarqube
+    repoURL: https://charts.bitnami.com/bitnami
     chart: sonarqube
-    targetRevision: 5.2.0
+    targetRevision: 15.0.4
     helm:
       releaseName: sonarqube
       values: |
         postgresql:
           enabled: false
-          postgresqlUsername: sonar
-          postgresqlPassword: sonarpassword
-          postgresqlDatabase: sonarqube
+          auth:
+            username: sonar
+            password: sonarpassword
+            database: sonarqube
         service:
           type: ClusterIP
+#        resources:
+#          requests:
+#            memory: 2Gi
+#            cpu: 1
+#          limits:
+#            memory: 4Gi
+#            cpu: 2
   destination:
     namespace: sonarqube
     server: 'https://kubernetes.default.svc'
