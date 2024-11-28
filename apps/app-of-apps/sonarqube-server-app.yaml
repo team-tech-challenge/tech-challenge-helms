@@ -28,7 +28,13 @@ spec:
           enabled: true
           jdbcUrl: jdbc:postgresql://tech-challenge-postgresql.clwfjxlpe5hc.us-east-1.rds.amazonaws.com:5432/sonarqube
           jdbcUsername: tech_challenge
-          jdbcPassword: tKg!dY8TW*vgfQez(kgk_
+          existingSecret: sonarqube-sonarqube
+        
+        readinessProbe:
+          enabled: false
+        
+        livenessProbe:
+          enabled: false
 
         initSysctl:
           enabled: true
