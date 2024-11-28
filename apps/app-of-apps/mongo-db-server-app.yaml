@@ -14,7 +14,7 @@ spec:
     helm:
       releaseName: mongodb
       values: |
-        architecture: replicaset
+        architecture: standalone
         auth:
           enabled: true
           existingSecret: mongodb-mongodb
