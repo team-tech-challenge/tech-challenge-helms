@@ -16,19 +16,12 @@ spec:
       values: |
         postgresql:
           enabled: false
-          auth:
-            username: sonar
-            password: sonarpassword
-            database: sonarqube
+        jdbcOverwrite:
+          jdbcUrl: jdbc:postgresql://tech-challenge-postgresql.clwfjxlpe5hc.us-east-1.rds.amazonaws.com:5432/sonarqube
+          jdbcUsername: tech_challenge
+          jdbcPassword: tKg!dY8TW*vgfQez(kgk_
         service:
           type: ClusterIP
-#        resources:
-#          requests:
-#            memory: 2Gi
-#            cpu: 1
-#          limits:
-#            memory: 4Gi
-#            cpu: 2
   destination:
     namespace: tool-security
     server: 'https://kubernetes.default.svc'
