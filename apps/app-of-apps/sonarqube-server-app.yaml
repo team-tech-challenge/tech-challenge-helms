@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://charts.bitnami.com/bitnami
+    repoURL: https://SonarSource.github.io/helm-chart-sonarqube
     chart: sonarqube
-    targetRevision: 15.0.4
+    targetRevision: 10.7.0+3598
     helm:
       releaseName: sonarqube
       values: |
