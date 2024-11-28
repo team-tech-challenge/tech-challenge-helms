@@ -30,7 +30,7 @@ spec:
 #            memory: 4Gi
 #            cpu: 2
   destination:
-    namespace: sonarqube
+    namespace: tool-security
     server: 'https://kubernetes.default.svc'
   syncPolicy:
     automated:
@@ -40,3 +40,4 @@ spec:
       - PruneLast=true
       - ApplyOutOfSyncOnly=true
       - ServerSideApply=true
+      - CreateNamespace=true
