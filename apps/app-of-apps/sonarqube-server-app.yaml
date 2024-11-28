@@ -45,7 +45,7 @@ spec:
           enabled: true
           ingressClassName: "nginx"
           annotations:
-            cert-manager.io/cluster-issuer: letsencrypt-musatech
+            cert-manager.io/cluster-issuer: letsencrypt-tech-challenge
           hosts:
             - name: sonarqube.techchallenge.com.br
               path: /
