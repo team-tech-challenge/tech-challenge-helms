@@ -20,6 +20,8 @@ spec:
           existingSecret: mongodb-mongodb
         persistence:
           size: 30Gi
+          storageClass: gp2
+          accessMode: ReadWriteOnce
   destination:
     namespace: tool-database
     server: 'https://kubernetes.default.svc'
