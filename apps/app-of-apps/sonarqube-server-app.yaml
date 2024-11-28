@@ -34,6 +34,11 @@ spec:
           enabled: true
           vmMaxMapCount: 524288
           fsFileMax: 131072
+        
+        persistence:
+          enabled: true
+          accessMode: ReadWriteOnce
+          size: 50Gi
   destination:
     namespace: tool-security
     server: 'https://kubernetes.default.svc'
