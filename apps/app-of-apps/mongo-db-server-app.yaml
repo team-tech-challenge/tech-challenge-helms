@@ -10,21 +10,18 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: mongodb
-    targetRevision: 13.3.1
+    targetRevision: 16.3.0
     helm:
       releaseName: mongodb
       values: |
-        architecture: standalone
+        architecture: replicaset
         auth:
           enabled: true
-          rootPassword: rootpassword
-          username: user
-          password: password
-          database: mydatabase
-#        persistence:
-#          size: 8Gi
+          existingSecret: mongodb-mongodb
+        persistence:
+          size: 30Gi
   destination:
-    namespace: mongodb
+    namespace: tool-database
     server: 'https://kubernetes.default.svc'
   syncPolicy:
     automated:
@@ -34,3 +31,4 @@ spec:
       - PruneLast=true
       - ApplyOutOfSyncOnly=true
       - ServerSideApply=true
+      - CreateNamespace=true
