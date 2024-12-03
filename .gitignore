@@ -39,3 +39,4 @@ terraform.rc
 # Ignrore directory IntelliJ IDEA
 .idea/
 .DS_Store
+create_secrets.sh
