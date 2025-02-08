@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-dns-public
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: 'https://charts.bitnami.com/bitnami'
+    chart: external-dns
+    targetRevision: 8.3.8
+    helm:
+      releaseName: external-dns-public
+      values: |
+        provider: aws
+        aws:
+          zoneType: public
+          region: us-east-1
+        policy: sync
+        logLevel: debug
+        sources:
+          - ingress
+        txtOwnerId: "bb46094b-690a-4067-ba97-09b76050d190"
+        interval: 6h
+        domainFilters:
+          - "techchallenge.com.br"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tool-external-dns
+  syncPolicy:
+    retry:
+      limit: 3
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - Validate=false
+      - Prune=true
+      - ApplyOutOfSyncOnly=true
+      - Force=true
+  revisionHistoryLimit: 5
