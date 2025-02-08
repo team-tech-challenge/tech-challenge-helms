@@ -41,7 +41,7 @@ spec:
         ingress:
           enabled: true
           ingressClassName: nginx
-          hostname: techchallenge.com
+          hostname: techchallenge.com.br
           tls: true
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt-tech-challenge
