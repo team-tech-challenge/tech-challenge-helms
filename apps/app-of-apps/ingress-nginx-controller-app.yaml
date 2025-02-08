@@ -14,7 +14,7 @@ spec:
       helm:
         parameters:
           - name: controller.kind
-            value: "DaemonSet"
+            value: "Deployment"
           - name: defaultBackend.enabled
             value: "true"
           - name: controller.config.allow-snippet-annotations
@@ -53,14 +53,6 @@ spec:
             value: "on"
           - name: controller.config.ssl-protocols
             value: "TLSv1.2 TLSv1.3"
-          - name: controller.resources.requests.cpu
-            value: "7m"
-          - name: controller.resources.requests.memory
-            value: "112Mi"
-          - name: controller.resources.limits.cpu
-            value: "50m"
-          - name: controller.resources.limits.memory
-            value: "200Mi"
           - name: defaultBackend.resources.requests.cpu
             value: "1m"
           - name: defaultBackend.resources.requests.memory
