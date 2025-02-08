@@ -18,9 +18,11 @@ spec:
           - name: defaultBackend.enabled
             value: "true"
           - name: controller.config.allow-snippet-annotations
-            value: "false"
+            value: "true"
           - name: controller.config.client-body-buffer-size
             value: "32k"
+          - name: controller.ingressClassResource.name
+            value: "nginx-public"
           - name: controller.config.client-max-body-size
             value: "10m"
           - name: controller.config.disable-ipv6

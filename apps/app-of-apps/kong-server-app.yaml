@@ -40,7 +40,7 @@ spec:
             adminHttps: 8444
         ingress:
           enabled: true
-          ingressClassName: nginx
+          ingressClassName: nginx-public
           hostname: techchallenge.com.br
           tls: true
           annotations:
