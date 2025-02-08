@@ -39,12 +39,12 @@ spec:
             adminHttp: 8001
             adminHttps: 8444
         ingress:
-          enabled: false
+          enabled: true
           ingressClassName: nginx
-          hostname: kong.mydomain.com
+          hostname: kong.techchallenge.com
           tls: true
           annotations:
-            cert-manager.io/cluster-issuer: letsencrypt-musatech
+            cert-manager.io/cluster-issuer: letsencrypt-tech-challenge
         kong:
           resources:
             requests:
