@@ -24,9 +24,9 @@ spec:
         postgresql:
           enabled: false
           external:
-            host: "tech-challenge-postgresql.cl1sidq0kykf.us-east-1.rds.amazonaws.com"
+            host: "video-service.cprblv9nt5qi.us-east-1.rds.amazonaws.com"
             port: 5432
-            user: "tech_challenge"
+            user: "video_service"
             password: "your-db-password"
             database: kong
             existingSecret: kong-external-secret
