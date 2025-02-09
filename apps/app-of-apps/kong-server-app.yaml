@@ -45,21 +45,26 @@ spec:
           tls: true
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt-tech-challenge
-            nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+            nginx.ingress.kubernetes.io/proxy-body-size: "150m"
+            nginx.ingress.kubernetes.io/proxy-buffer-size: "50m"
+            nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
+            nginx.ingress.kubernetes.io/proxy-send-timeout: "300"  
+            nginx.ingress.kubernetes.io/proxy-read-timeout: "300"  
+            nginx.ingress.kubernetes.io/client-body-buffer-size: "16m"
         kong:
-          resources:
-            requests:
-              cpu: 76m
-              memory: 314Mi
-            limits:
-              cpu: 152m
-              memory: 628Mi
-        ingressController:
-          enabled: false
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: tool-authorization
-  syncPolicy:
-    automated:
-      prune: false
-      selfHeal: true
+            resources:
+              requests:
+                cpu: 76m
+                memory: 314Mi
+              limits:
+                cpu: 152m
+                memory: 628Mi
+          ingressController:
+            enabled: false
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: tool-authorization
+    syncPolicy:
+      automated:
+        prune: false
+        selfHeal: true
