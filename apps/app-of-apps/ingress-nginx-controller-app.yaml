@@ -19,12 +19,8 @@ spec:
             value: "true"
           - name: controller.config.allow-snippet-annotations
             value: "true"
-          - name: controller.config.client-body-buffer-size
-            value: "32k"
           - name: controller.ingressClassResource.name
             value: "nginx-public"
-          - name: controller.config.client-max-body-size
-            value: "50m"
           - name: controller.config.disable-ipv6
             value: "true"
           - name: controller.config.enable-access-log
