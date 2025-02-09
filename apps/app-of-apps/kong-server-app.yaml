@@ -45,6 +45,7 @@ spec:
           tls: true
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt-tech-challenge
+            nginx.ingress.kubernetes.io/proxy-body-size: "100m"
         kong:
           resources:
             requests:
