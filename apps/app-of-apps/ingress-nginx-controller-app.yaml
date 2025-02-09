@@ -55,6 +55,8 @@ spec:
             value: "1m"
           - name: defaultBackend.resources.requests.memory
             value: "4Mi"
+          - name: controller.config.client-max-body-size
+            value: "100m"
   destination:
     namespace: tool-ingress
     server: 'https://kubernetes.default.svc'
