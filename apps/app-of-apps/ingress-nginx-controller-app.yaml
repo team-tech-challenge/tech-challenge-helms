@@ -24,7 +24,7 @@ spec:
           - name: controller.ingressClassResource.name
             value: "nginx-public"
           - name: controller.config.client-max-body-size
-            value: "10m"
+            value: "50m"
           - name: controller.config.disable-ipv6
             value: "true"
           - name: controller.config.enable-access-log
