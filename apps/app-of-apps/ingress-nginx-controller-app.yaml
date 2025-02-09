@@ -17,6 +17,8 @@ spec:
             value: "Deployment"
           - name: defaultBackend.enabled
             value: "true"
+          - name: controller.replicaCount
+            value: "2"
           - name: controller.config.allow-snippet-annotations
             value: "true"
           - name: controller.ingressClassResource.name
